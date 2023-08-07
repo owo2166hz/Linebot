@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-07 16:48:14
+LastEditTime: 2023-08-07 16:49:45
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -52,7 +52,7 @@ def handle_message(event):
     if event.message.text == '小幫手':
         line_bot_api.reply_message(event.reply_token , buttons_template)
 
-    ############################    OWO    ############################
+    ############################    OWO0    ############################
     ############################    油價    ############################
 
     if event.message.text == '想知道油價':
@@ -61,8 +61,8 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content))
     
-    ############################    OWO    ############################
-    if event.message.text == '股價查詢' or '股價':
+    ############################    股票區    ############################
+    if event.message.text == '股價查詢':
         line_bot_api.push_message(uid,TextMessage("請輸入#加股票代號..."))
     
 @handler.add(UnfollowEvent)
