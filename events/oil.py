@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def oil_price():
-    target_url = ''
+    target_url = 'https://gas.goodlife.tw/'
     rs = requests.session()
     res = rs.get(target_url, verify=False)
     res.encoding = 'utf-8'
