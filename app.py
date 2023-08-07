@@ -36,17 +36,17 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message_text = str(event.message.text).lower()
-    if message_text == '使用說明'or'說明'or'HELP'or'help' :
+    if message_text == '使用說明':
         about_us_event(event)
         Usage(event)
     
         
-    if event.message.text == '小幫手'or'help':
+    if event.message.text == '小幫手':
         line_bot_api.reply_message(event.reply_token , buttons_template)
 
     ############################
 
-    if event.message.text == '想知道油價' or'油價' or "你媽":
+    if event.message.text == '想知道油價':
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,
