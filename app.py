@@ -35,34 +35,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message_text = str(event.message.text).lower()
-    if message_text == '@使用說明':
+    if message_text == '使用說明':
         about_us_event(event)
-    if message_text == '@查詢方法':
         Usage(event)
-    if event.message.text == '@小幫手':
-        buttons_template = TemplateSendMessage(
-            alt_text='小幫手 template',
-            template=ButtonsTemplate(
-                title = '選擇服務',
-                text='請選擇',
-                thumbnail_image_url = 'https://i.imgur.com/zGN9PFZ.png',
-                actions=[
-                    MessageTemplateAction(
-                        label='油價查詢',
-                        text='油價查詢'
-                    ),
-                    MessageTemplateAction(
-                        label='匯率查詢',
-                        text='匯率查詢'
-                    ),
-                    MessageTemplateAction(
-                        label='股價查詢',
-                        text='股價查詢'
-                    )
-                ]
-            )
-
-        )
+    
+        
+    if event.message.text == '小幫手':
         line_bot_api.reply_message(event.reply_token , buttons_template)
     
 
