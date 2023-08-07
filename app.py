@@ -8,6 +8,25 @@ app = Flask (__name__)
 line_bot_api = LineBotApi('/5O5W/lf2xUg2O4/x/whu8JrKyoN4LzoExue5u+JTJmrOOZlkYq+KDSiW/lDhAInEIAr1tiNT8r4IC71DYNf7cEB95E7kB63JAh/Q+jyMFE3IaMy4hc9FgKjPUx6GrWrbSmgPbXHYbO2VLkt3vJQ5wdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('9110abd2b90e95aa80c4cb30023507d7')
 
+@app.route("/callback",methods=['POST'])
+def callback():
+    signature = request.headers['X-Libe-Signature']
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    try:
+        handler.handle(body , signature)
+    except InvalidSignatureError:abort(400)
+
+    return 'OK'
+
+@handler.add(MessageEvent,message = TextMessage)
+def handle_message(event):
+    message = TextSendMessage(text=event.message.text)
+    line_bot_api.reply_message(event.reply_token,message)
+
+if __name__ == "__main__":app.run()
+
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -29,10 +48,33 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+
+    emoji = [
+            {
+                "imdex":0,
+                "productId":"5ac21184040ab15980c9b43a",
+                "emojiId":"001"
+            },
+            {
+                "imdex":17,
+                "productId":"5ac21184040ab15980c9b43a",
+                "emojiId":"001"
+            }
+    ]
+
+
+    text_message = TextSendMessage(text='''$ Master Finance $
+Hello! 您好 歡迎您成為OWO的好友
+我是OWO財經小幫手
+-這裡有股票 匯率資訊
+-直接點選下方的選單功能
+-期待您的光臨''',emojis=emoji)
+    sticker_message = StickerSendMessage(
+        package_id='8522',
+        sticker_id='16581271'
+    )
+    
 
 
 if __name__ == "__main__":
     app.run()
-
