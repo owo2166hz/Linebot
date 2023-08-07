@@ -62,8 +62,7 @@ Hello! 您好 歡迎您成為OWO的好友
     )
     line_bot_api.reply_message(
         event.reply_token,
-        [text_message,sticker_message]
-    )
+        [text_message,sticker_message])
     
 
 
