@@ -1,22 +1,15 @@
-'''
-Author: owo2166hz owo2166hz@gmail.com
-Date: 2023-08-07 12:26:43
-LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-07 12:28:19
-FilePath: \OWOc:\Users\owo21\Downloads\app.py
-Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-'''
 from flask import Flask, request, abort
-from linebot import (LineBotApi, WebhookHandler, exceptions)
 from linebot.exceptions import (InvalidSignatureError)
+from linebot import (LineBotApi, WebhookHandler, exceptions)
 from linebot.models import *
 
-app = Flask(__name__)
+app = Flask (__name__)
 
-#自己的Channel Access Token(在Messaging API底下)
-line_bot_api = LineBotApi("wR6RWNy+d1LEYGfPCD0AbGehrEI+cPTQxChN5KftrpfD7JZbuwKIoj1Ys41AL8+S2tehpIAOJVeZihxBVyZnMi8YPeHpQT9PeMRzc+UfkGwoxcSYIc9H+5yLPh3HSvsR4cagMIIFHybDESjA0+CiewdB04t89/1O/w1cDnyilFU=")
-#自己的Channel secret(在Basic Settings底下)
-handler = WebhookHandler("5c7720c80fc66096c32f76253778ded8")
+line_bot_api = LineBotApi('/5O5W/lf2xUg2O4/x/whu8JrKyoN4LzoExue5u+JTJmrOOZlkYq+KDSiW/lDhAInEIAr1tiNT8r4IC71DYNf7cEB95E7kB63JAh/Q+jyMFE3IaMy4hc9FgKjPUx6GrWrbSmgPbXHYbO2VLkt3vJQ5wdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('9110abd2b90e95aa80c4cb30023507d7')
+
+
+
 
 #監聽所有來自/callback的Post Request
 @app.route("/callback", methods=["POST"])
