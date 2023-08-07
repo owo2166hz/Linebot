@@ -65,10 +65,13 @@ def handle_message(event):
 
     text_message = TextSendMessage(text='''$ Master Finance $
 Hello! 您好 歡迎您成為OWO的好友
+                                   
 我是OWO財經小幫手
+                                   
 -這裡有股票 匯率資訊
 -直接點選下方的選單功能
 -期待您的光臨''',emojis=emoji)
+    
     sticker_message = StickerSendMessage(
         package_id='8522',
         sticker_id='16581271'
