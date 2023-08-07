@@ -63,7 +63,7 @@ def handle_message(event):
     
     ############################    股票區    ############################
     if event.message.text == '股價查詢':
-        line_bot_api.push_message(uid,TextMessage("請輸入#加股票代號..."))
+        line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
     
 @handler.add(UnfollowEvent)
 def handle_follow(event):
