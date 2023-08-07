@@ -41,27 +41,23 @@ def handle_message(event):
     emoji = [
             {"index":0,
              "productId":"5ac21b4f031a6752fb806d59",
-             "emojiId":"011"
+             "emojiId":"041"
                 },
 
             {"index":1,
              "productId":"5ac21b4f031a6752fb806d59",
-             "emojiId":"035"
+             "emojiId":"049"
                 },
             {"index":2,
              "productId":"5ac21b4f031a6752fb806d59",
-             "emojiId":"049"
-                },
-            {"index":3,
-             "productId":"5ac21b4f031a6752fb806d59",
-             "emojiId":"035"
+             "emojiId":"041"
                 },
             ]
     #歡迎訊息
-    text_message = TextSendMessage(text="""$$$$
-Hello! 恭喜您成為kiwi機器人的第100個好友
-這邊提供了一些功能，這段只是歡迎訊息而已
-才不希望你點進來呢！""",emojis=emoji)
+    text_message = TextSendMessage(text="""$$$
+告知 歡迎成為OWO好友
+此處提供一些功能以及歡迎訊息
+""",emojis=emoji)
     
     #貼圖訊息
     sticker_message = StickerMessage(
