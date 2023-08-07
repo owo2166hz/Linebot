@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-07 15:54:19
+LastEditTime: 2023-08-07 16:30:21
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -33,6 +33,10 @@ def callback():
 
 
 #處理訊息(這邊是歡迎訊息)
+@handler.add(FollowEvent)
+def handle_follow(event):
+    welcome_msg = """ Hello 您好 歡迎你成為OWO的好友 我是OWO 財經小幫手 這裡有股票 匯率資訊喔 期待您的光臨"""
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message_text = str(event.message.text).lower()
@@ -52,6 +56,10 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content))
     
+@handler.add(UnfollowEvent)
+def handle_follow(event):
+    print(event)
+
 
 if __name__=="__main__":
     app.run() 
