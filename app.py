@@ -60,6 +60,10 @@ Hello! 您好 歡迎您成為OWO的好友
         package_id='8522',
         sticker_id='16581271'
     )
+    line_bot_api.reply_message(
+        event.reply_token,
+        [text_message,sticker_message]
+    )
     
 
 
