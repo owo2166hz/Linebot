@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-08 11:25:18
+LastEditTime: 2023-08-08 11:31:06
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -44,7 +44,7 @@ def handle_message(event):
     Profile = line_bot_api.get_profile(event.source.user_id)
     uid = Profile.user_id
     message_text = str(event.message.text).lower()
-    if message_text == '使用說明':
+    if message_text in ['使用說明','說明','help','@使用說明']:
         about_us_event(event)
         Usage(event)
     
@@ -55,16 +55,18 @@ def handle_message(event):
     ############################    OWO0    ############################
     ############################    油價    ############################
 
-    if event.message.text == '想知道油價':
+    if event.message.text in ['想知道油價','油價']:
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
     
     ############################    股票區    ############################
-    if event.message.text == '股價查詢':
+    if event.message.text in ['股價查詢','股價']:
         line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
     
+
+    ############################    OWO0    ############################
 @handler.add(UnfollowEvent)
 def handle_follow(event):
     print(event)
