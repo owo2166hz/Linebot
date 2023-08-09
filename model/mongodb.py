@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-09 11:32:52
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-09 13:36:22
+LastEditTime: 2023-08-09 13:39:31
 FilePath: \Linebot-1\model\mongodb.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -30,7 +30,7 @@ def write_my_stock(userID,user_name, stockNumber, condition , target_price):
     collect = db[user_name]
     is_exit = collect.find_one({"favorite_stock":stockNumber})
     if is_exit != None :
-        content = updata_my_stock(user_name,stockNumber,condition,target_price)
+        content = update_my_stock(user_name,stockNumber,condition,target_price)
         return content
     else:
         collect.insert_one({
