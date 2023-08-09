@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-09 11:32:52
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-09 13:39:31
+LastEditTime: 2023-08-09 14:14:50
 FilePath: \Linebot-1\model\mongodb.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -15,7 +15,7 @@ dbname = 'howard-good31'
 # Authentication Database認證資料庫
 
 def constructor_stock(): 
-    client = MongoClient("mongodb://owo2166hz:WVXbVoBSivFMnKI2-ry9oitq-shard-00-00.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-01.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-02.tevu9ns.mongodb.net:27017/?ssl=true&replicaSet=atlas-m5uf0e-shard-0&authSource=admin&retryWrites=true&w=majority")
+    client = MongoClient("mongodb://owo2166hz:cKBrRzRJhTFFgkxl@ac-ry9oitq-shard-00-00.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-01.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-02.tevu9ns.mongodb.net:27017/?ssl=true&replicaSet=atlas-m5uf0e-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client[stockDB]
     return db
 
