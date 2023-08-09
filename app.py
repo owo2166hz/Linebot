@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-09 15:35:01
+LastEditTime: 2023-08-09 16:20:00
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -11,6 +11,8 @@ from events.basic import *
 from events.oil import *
 from events.Msg_Template import *
 from model.mongodb import *
+from events.EXRate import *
+
 import re
 import twstock
 import datetime
@@ -118,6 +120,11 @@ def handle_message(event):
     if re.match('幣別種類',emsg):
         message = show_Button()
         line_bot_api.reply_message(event.reply_token,message)
+
+    if re.match("換匯[A-Z]{3}/[A-Z{3}]", msg):
+        line_bot_api.push_message(uid,TextSendMessage("將為您做外匯計算......"))
+        content = getExchangeRate(msg)
+        line_bot_api.push_message(uid,TextSendMessage(content))
         
 # @handler.add(FollowEvent)
 # def handle_follow(event):
