@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-09 14:35:01
+LastEditTime: 2023-08-09 15:02:57
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -61,20 +61,16 @@ def handle_message(event):
         
     if event.message.text in ['小幫手', '幫手']:
         line_bot_api.reply_message(event.reply_token , buttons_template)
-
-    ############################    OWO0    ############################
     ############################    油價    ############################
-
     if event.message.text in ['想知道油價','油價']:
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
-    
     ############################    股票區    ############################
     if event.message.text in ['股價查詢','股價']:
         line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
-    ############################    股價查詢    ############################
+    ############################    股價查    ############################
     if re.match("關注[0-9]{4}[<>][0-9]", msg):
         stockNumber = msg[2:6]
         line_bot_api.push_message(uid, TextSendMessage("加入股票代號"+stockNumber))
@@ -115,6 +111,17 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=content)
         )
+
+
+
+        ############################    匯率區    ############################
+    if re.match('幣別種類'.emsg):
+        message = show_Button()
+        line_bot_api.reply_message(event.reply_token,message)
+# @handler.add(FollowEvent)
+# def handle_follow(event):
+#     welcome_msg = """ Hello! 您好 歡迎您成為"""
+
         
 
  
