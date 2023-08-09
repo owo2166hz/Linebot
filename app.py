@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-09 10:33:56
+LastEditTime: 2023-08-09 13:32:09
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -10,10 +10,12 @@ from line_bot_api import *
 from events.basic import *
 from events.oil import *
 from events.Msg_Template import *
+from model.mongodb import *
 import re
 import twstock
 import datetime
 
+user_name = Profile.display_name
 app = Flask (__name__)
 
 #監聽所有來自/callback的Post Request
@@ -71,33 +73,36 @@ def handle_message(event):
     if event.message.text in ['股價查詢','股價']:
         line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
     ############################    股價查詢    ############################
-    if re.match("想知道股價", msg):
-    
-        btn_msg = stock_reply_other(msg)
-        line_bot_api.push_message(uid, btn_msg)
+    if re.match("關注[0-9]{4}[<>][0-9]", msg):
+        stockNumber = msg[2:6]
+        btn_msg = stock_reply_other(uid,user_name,stockNumber,msg[6:7],msg[7:])
+        line_bot_api.push_message(uid, TextSendMessage(content))
+    else:
+        content = write_my_stock(uid,user_name , stockNumber,"未設定","未設定")
+        line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
-    
-    if (emsg.startswith('#')):
+    if(emsg.startswith('#')):
         text = emsg[1:]
-        content =''
+        content = ''
 
         stock_rt = twstock.realtime.get(text)
         my_datetime = datetime.datetime.fromtimestamp(stock_rt['timestamp']+8*60*60)
         my_time = my_datetime.strftime('%H:%M:%S')
 
-        content +='%s (%s) %s\n' % (
+        content += '%s (%s) %s\n'%(
             stock_rt['info']['name'],
             stock_rt['info']['code'],
-            my_time)
-        
-        content += '現價: %s / 開盤: %s\n'%(
+            my_time
+        )
+        content += '線價: %s / 開盤: %s\n'%(
             stock_rt['realtime']['latest_trade_price'],
-            stock_rt['realtime']['open'])
-        content += '最高: %s / 最低:%s\n'%(
+            stock_rt['realtime']['open'],
+        )
+        content += '最高: %s / 最低: %s\n'%(
             stock_rt['realtime']['high'],
-            stock_rt['realtime']['low'])
-        
-        content += '量: %s\n'%(stock_rt['realtime']['accumulate_trade_volume'])
+            stock_rt['realtime']['low'],
+        )
+        content += '量: %s\n '%(stock_rt['realtime']['accumulate_trade_volume'])
 
         stock = twstock.Stock(text)
         content += '-----\n'
@@ -105,9 +110,9 @@ def handle_message(event):
         price5 = stock.price[-5:][::-1]
         date5 = stock.date[-5:][::-1]
         for i in range(len(price5)):
-            content += '[%s] %s\n' % (date5[i].strftime("%Y-%m-%d"), price5[i])
+            content += '[%s]%s \n' %(date5[i].strftime("%Y-%m-%d"),price5[i])
         line_bot_api.reply_message(
-            event.reply_token, 
+            event.reply_token,
             TextSendMessage(text=content)
         )
         
