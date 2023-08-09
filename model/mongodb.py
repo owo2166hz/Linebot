@@ -15,7 +15,7 @@ dbname = 'howard-good31'
 # Authentication Database認證資料庫
 
 def constructor_stock(): 
-    client = MongoClient("mongodb://owo2166hz:5S6kcG.7sAsjkq5@ac-ry9oitq-shard-00-00.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-01.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-02.tevu9ns.mongodb.net:27017/?ssl=true&replicaSet=atlas-m5uf0e-shard-0&authSource=admin&retryWrites=true&w=majority")
+    client = MongoClient("mongodb://owo2166hz:WVXbVoBSivFMnKI2-ry9oitq-shard-00-00.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-01.tevu9ns.mongodb.net:27017,ac-ry9oitq-shard-00-02.tevu9ns.mongodb.net:27017/?ssl=true&replicaSet=atlas-m5uf0e-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client[stockDB]
     return db
 
