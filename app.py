@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 15:35:23
+LastEditTime: 2023-08-11 15:41:16
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -163,14 +163,14 @@ def handle_message(event):
     if re.match("股價提醒", msg):
         import schedule
         import time
-        print('HH')
+        
         # 查看當前股價
         def look_stock_price(stock, condition, price, userID):
             print(userID)
             url = 'https://tw.stock.yahoo.com/q/q?s=' + stock
             list_req = requests.get(url)
             soup = BeautifulSoup(list_req.content, "html.parser")
-            getstock= soup.findAll('b')[1].text
+            getstock= soup.findAll('span')[1].text
             content = stock + "當前股市價格為: " +  getstock
             if condition == '<':
                 content += "\n篩選條件為: < "+ price
