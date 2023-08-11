@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 14:15:04
+LastEditTime: 2023-08-11 14:38:29
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -20,6 +20,16 @@ import datetime
 
 
 app = Flask (__name__)
+############################    抓使用者關心的股票    ############################
+def cache_users_stock():
+    db=constructor_stock()
+    nameList = db.list_collection_names()
+    users = []
+    for i in range(len(nameList)):
+        collect =db[nameList[i]]
+        cel = list(collect.find({"tag":'stock'}))
+        users.append(cel)
+    return users
 
 #監聽所有來自/callback的Post Request
 @app.route("/callback", methods=["POST"])
@@ -149,6 +159,57 @@ def handle_message(event):
         content = delete_my_stock(user_name, uid)
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
+        ############################    股價提醒    ############################
+    if re.match("股價提醒", msg):
+        import schedule
+        import time
+        def look_stock_price(stock,condition,price,userID):
+            print(userID)#,stock,condition,price,userID)
+            url = 'https://tw.stock.yahoo.com/q/q?s=' +stock
+            list_req = requests.get(url)
+            soup = BeautifulSoup(list_req.content,"html.parser")
+            getstock = soup.findALL('b')[1].text
+            content = stock + "目前股市價格為:" + getstock
+            if condition == '<' :
+                content += "\n篩選條件為: <" + price
+                if float(getstock) < float(price):
+                    content += "\n符合" + getstock + " < " + price + "的篩選條件"
+                    line_bot_api.push_message(userID,TextSendMessage(text=content))
+            elif condition == '>' :
+                content += "\n篩選條件為: >" + price
+                if float(getstock) > float(price):
+                    content += "\n符合" + getstock + " > " + price + "的篩選條件"
+                    line_bot_api.push_message(userID,TextSendMessage(text=content))
+            elif condition == '=' :
+                content += "\n篩選條件為: =" + price
+                if float(getstock) == float(price):
+                    content += "\n符合" + getstock + " = " + price + "的篩選條件"
+                    line_bot_api.push_message(userID,TextSendMessage(text=content))
+        
+        def job():
+            print('hh')
+            dataList = cache_users_stock()
+            for i in range(len(dataList)):
+                for k in range(len(dataList[i])):
+                    look_stock_price(dataList[i][k]['favorite_stock'], dataList[i][k]['condition'], dataList[i][k]['price'], dataList[i][k]['userID'])
+        schedule.every (30).seconds.do(job).tag('daily-tesks-stock' +uid,'second')
+        # schedule.every ().hour.do(job) #每小時
+        # schedule.every ().day.at("17:19") #每周930
+        # schedule.every ().mondat.do(job) #每周1
+        # schedule.every ().wednesday.at("14:15").do(job)#每周3 1415
+
+
+        while True:
+            schedule.run_pending()
+            time.sleep(1)         
+
+
+
+
+
+
+            
+
     
 
 # @handler.add(FollowEvent)
