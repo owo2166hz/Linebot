@@ -2,11 +2,11 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 11:25:35
+LastEditTime: 2023-08-11 11:36:57
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
-from line_bot_api import *
+from API.line_bot_api import *
 from events.basic import *
 from events.oil import *
 from events.Msg_Template import *
@@ -59,8 +59,6 @@ def handle_message(event):
     if message_text in ['使用說明','說明','help','@使用說明']:
         about_us_event(event)
         Usage(event)
-    
-        
     if event.message.text in ['小幫手', '幫手']:
         line_bot_api.reply_message(event.reply_token , buttons_template)
     ############################    油價    ############################
@@ -79,6 +77,7 @@ def handle_message(event):
         content = write_my_stock(uid,user_name,stockNumber,msg[6:7],msg[7:])
         line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
+    ############################    幣別    ############################
     if(emsg.startswith('#')):
         text = emsg[1:]
         content = ''

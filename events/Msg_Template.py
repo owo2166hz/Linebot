@@ -6,7 +6,7 @@ LastEditTime: 2023-08-09 15:58:56
 FilePath: \Linebot-1\events\Msg_Template.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
-from line_bot_api import *
+from API.line_bot_api import *
 
 
 def stock_reply_other(stockNumber):
