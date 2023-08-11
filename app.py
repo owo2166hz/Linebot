@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 11:58:45
+LastEditTime: 2023-08-11 14:07:12
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -139,7 +139,18 @@ def handle_message(event):
         line_bot_api.push_message(uid,TextSendMessage("將為您做外匯計算......"))
         content = getExchangeRate(msg)
         line_bot_api.push_message(uid,TextSendMessage(content))
-        
+    
+        ############################    股票區    ############################
+    if re.match("刪除[0-9]{4}", msg):
+        content = delete_my_stock(user_name, msg[2:])
+        line_bot_api.push_message(uid,TextSendMessage(content))
+        return 0
+    if re.match("清空股票", msg):
+        content = delete_my_stock(user_name, msg[2:])
+        line_bot_api.push_message(uid,TextSendMessage(content))
+        return 0
+    
+
 # @handler.add(FollowEvent)
 # def handle_follow(event):
 #     welcome_msg = """ Hello! 您好 歡迎您成為"""
