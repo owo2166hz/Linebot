@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 16:00:34
+LastEditTime: 2023-08-11 16:10:02
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -173,7 +173,7 @@ def handle_message(event):
             url = 'https://tw.stock.yahoo.com/q/q?s=' + stock
             list_req = requests.get(url)
             soup = BeautifulSoup(list_req.content, "html.parser")
-            getstock= soup.findAll('span')[1].text
+            getstock= soup.findAll('span')[11].text
             content = stock + "當前股市價格為: " +  getstock
             if condition == '<':
                 content += "\n篩選條件為: < "+ price
