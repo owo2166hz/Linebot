@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 11:36:57
+LastEditTime: 2023-08-11 11:58:45
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -70,6 +70,12 @@ def handle_message(event):
     ############################    股票區    ############################
     if event.message.text in ['股價查詢','股價']:
         line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
+    if re.match("想知道股價[0-9]",msg):
+        msg = msg[5:]
+        btn_msg = stock_reply_other(msg)
+        line_bot_api.push_message(uid , btn_msg)
+        return 0
+    
     ############################    股價查    ############################
     if re.match("關注[0-9]{4}[<>][0-9]", msg):
         stockNumber = msg[2:6]
@@ -77,6 +83,10 @@ def handle_message(event):
         content = write_my_stock(uid,user_name,stockNumber,msg[6:7],msg[7:])
         line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
+    if re.match('股票清單',msg):
+        line_bot_api.push_message(uid , TextSendMessage('稍等一下 股票查詢中..'))
+        content = show_stock_setting(user_name, uid)
+        line_bot_api.push_message(uid , TextSendMessage(content))
     ############################    幣別    ############################
     if(emsg.startswith('#')):
         text = emsg[1:]
