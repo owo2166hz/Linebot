@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 14:07:12
+LastEditTime: 2023-08-11 14:15:04
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -146,7 +146,7 @@ def handle_message(event):
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
     if re.match("清空股票", msg):
-        content = delete_my_stock(user_name, msg[2:])
+        content = delete_my_stock(user_name, uid)
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
     
