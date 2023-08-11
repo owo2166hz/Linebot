@@ -59,7 +59,7 @@ def delete_my_stock(user_mame, stockNumber):
     collect = db[user_mame]
     collect.delete_many({'favorite_stock': stockNumber})
     return stockNumber + "刪除成功"
-def delete_my_stock(user_mame, userID):
+def delete_my_allstock(user_mame, userID):
     db = constructor_stock()
     collect = db[user_mame]
     collect.delete_many({'userID': userID})

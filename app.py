@@ -156,7 +156,7 @@ def handle_message(event):
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
     if re.match("清空股票", msg):
-        content = delete_my_stock(user_name, uid)
+        content = delete_my_allstock(user_name, uid)
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
         ############################    股價提醒    ############################
