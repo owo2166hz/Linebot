@@ -160,6 +160,9 @@ def handle_message(event):
         line_bot_api.push_message(uid,TextSendMessage(content))
         return 0
         ############################    股價提醒    ############################
+    if re.match("關閉提醒", msg):
+        import schedule
+        schedule.clear()
     if re.match("股價提醒", msg):
         import schedule
         import time
