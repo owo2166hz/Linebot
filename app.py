@@ -68,11 +68,18 @@ def handle_message(event):
     user_name = Profile.display_name
     if message_text in ['使用說明','說明','help','@使用說明']:
         #about_us_event(event)
+        exchange_rate(event)
+
+    if message_text in ['匯率大小事']:
+        message = show_Button()
+        line_bot_api.reply_message(event.reply_token,message)
         Usage(event)
+
+
     if event.message.text in ['小幫手', '幫手']:
         line_bot_api.reply_message(event.reply_token , buttons_template)
     ############################    油價    ############################
-    if event.message.text in ['想知道油價','油價','查詢油價']:
+    if event.message.text in ['想知道油價','油價','查詢油價','油價查詢']:
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,

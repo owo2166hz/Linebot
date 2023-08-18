@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 13:20:36
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-07 15:56:49
+LastEditTime: 2023-08-18 13:46:41
 FilePath: \OWO\LINEBOT\events\basic.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -56,6 +56,12 @@ def Usage(event):
              \n 🌎匯率通知 輸入查詢由下\
              \n 🌎匯率兌換 換匯USD/TWD\
              \n 🌎股價查詢 輸入#股票代碼")
+def exchange_rate(event):
+    push_msg(event," 🥹查詢方法🥹  \
+             \n 🌎匯率兌換 換匯USD/TWD/金額\
+            ")
+    
+    
 
     
 buttons_template = TemplateSendMessage(
