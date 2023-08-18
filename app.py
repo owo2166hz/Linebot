@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-11 16:10:02
+LastEditTime: 2023-08-15 19:36:31
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -67,18 +67,18 @@ def handle_message(event):
     emsg = event.message.text
     user_name = Profile.display_name
     if message_text in ['使用說明','說明','help','@使用說明']:
-        about_us_event(event)
+        #about_us_event(event)
         Usage(event)
     if event.message.text in ['小幫手', '幫手']:
         line_bot_api.reply_message(event.reply_token , buttons_template)
     ############################    油價    ############################
-    if event.message.text in ['想知道油價','油價']:
+    if event.message.text in ['想知道油價','油價','查詢油價']:
         content = oil_price()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=content))
     ############################    股票區    ############################
-    if event.message.text in ['股價查詢','股價']:
+    if event.message.text in ['股價查詢','股價','想知道股價']:
         line_bot_api.push_message(uid,TextSendMessage("請輸入#加股票代號..."))
     if re.match("想知道股價[0-9]",msg):
         msg = msg[5:]
