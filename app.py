@@ -2,7 +2,7 @@
 Author: owo2166hz owo2166hz@gmail.com
 Date: 2023-08-07 09:38:44
 LastEditors: owo2166hz owo2166hz@gmail.com
-LastEditTime: 2023-08-18 14:02:43
+LastEditTime: 2023-08-18 14:12:13
 FilePath: \OWO\LINEBOT\app.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -73,7 +73,7 @@ def handle_message(event):
     if message_text in ['匯率查詢']:
         message = show_Button()
         line_bot_api.reply_message(event.reply_token,message)
-        Usage(event)
+        exchange_rate(event)
 
 
     if event.message.text in ['小幫手', '幫手']:
